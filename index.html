@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #333;
+            background-color: white;
+            border-radius: 10px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .hint {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1>Guess the Number</h1>
+    <p>Try to guess the number between 1 and 100!</p>
+    <input type="number" id="guess" min="1" max="100" placeholder="Enter your guess" required>
+    <button onclick="checkGuess()">Guess</button>
+    <div class="result" id="result"></div>
+    <div class="hint" id="hint"></div>
+</div>
+
+<script>
+    let randomNumber = Math.floor(Math.random() * 100) + 1;  // Random number between 1 and 100
+    let attempts = 0;
+
+    function checkGuess() {
+        let userGuess = parseInt(document.getElementById("guess").value);
+        attempts++;
+
+        if (userGuess === randomNumber) {
+            document.getElementById("result").textContent = `Congratulations! You guessed the right number in ${attempts} attempts.`;
+            document.getElementById("hint").textContent = "";
+        } else if (userGuess < randomNumber) {
+            document.getElementById("result").textContent = "Too low! Try again.";
+            document.getElementById("hint").textContent = "Hint: The number is higher.";
+        } else if (userGuess > randomNumber) {
+            document.getElementById("result").textContent = "Too high! Try again.";
+            document.getElementById("hint").textContent = "Hint: The number is lower.";
+        }
+    }
+</script>
+
+</body>
+</html>
